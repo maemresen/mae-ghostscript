@@ -1,0 +1,7 @@
+name: mae-ghostscript
+services:
+  ghostscript:
+    build:
+      context: .
+    volumes:
+      - .:/usr/src/app/resources
