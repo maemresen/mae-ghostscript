@@ -1,9 +1,13 @@
 #!/bin/sh
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 input.pdf output.pdf"
+if [ -z "$INPUT_PDF" ]; then
+  echo "Error: Please set INPUT_PDF environment variables."
+  echo "Usage: INPUT_PDF=input.pdf OUTPUT_PDF=output.pdf ./compress.sh"
   exit 1
 fi
+
+TIMESTAMP=$(date +"%Y_%m_%d-%H_%M_%S")
+OUTPUT_PDF="${INPUT_PDF%.pdf}-compressed-${TIMESTAMP}.pdf"
 
 gs -sDEVICE=pdfwrite \
   -dCompatibilityLevel=1.4 \
@@ -17,4 +21,4 @@ gs -sDEVICE=pdfwrite \
   -dPDFSETTINGS=/ebook \
   -dNOPAUSE \
   -dQUIET \
-  -dBATCH "-sOutputFile=$2" $1
+  -dBATCH "-sOutputFile=pdf-files/$OUTPUT_PDF" "pdf-files/$INPUT_PDF"
