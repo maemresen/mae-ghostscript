@@ -6,14 +6,6 @@ if [ "$#" -ne 2 ]; then
 fi
 
 gs -sDEVICE=pdfwrite \
--dCompatibilityLevel=1.4 \
--dPDFSETTINGS=/screen \
--dNOPAUSE \
--dBATCH \
--dQUIET \
-
-
-gs -sDEVICE=pdfwrite \
   -dCompatibilityLevel=1.4 \
   -dDownsampleColorImages=true \
   -dColorImageDownsampleType=/Bicubic \
