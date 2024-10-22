@@ -1,7 +1,0 @@
-name: mae-ghostscript
-services:
-  ghostscript:
-    build:
-      context: .
-    volumes:
-      - ./resources:/usr/src/app/pdf-files
