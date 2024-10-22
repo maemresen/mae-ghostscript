@@ -14,10 +14,9 @@ RUN apt-get update && \
 WORKDIR /usr/src/app
 
 # Copy the entrypoint script (which includes the Ghostscript compression command)
-COPY src/compress.sh /usr/src/app/compress.sh
+COPY ./src/compress.sh compress.sh
 
 # Make the script executable
-RUN chmod +x /usr/src/app/compress.sh
+RUN chmod +x compress.sh
 
-# Default command to run the script
-ENTRYPOINT ["/usr/src/app/compress.sh"]
+ENTRYPOINT ["sh","/usr/src/app/compress.sh"]

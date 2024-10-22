@@ -4,4 +4,4 @@ services:
     build:
       context: .
     volumes:
-      - .:/usr/src/app/resources
+      - ./resources:/usr/src/app/pdf-files

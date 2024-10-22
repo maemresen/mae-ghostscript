@@ -2,7 +2,7 @@
 
 # Build the Docker image using Docker Compose
 echo "Building Docker image using Docker Compose..."
-docker-compose build
+docker-compose build --no-cache
 
 # Check if the build was successful
 if [ $? -eq 0 ]; then

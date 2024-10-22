@@ -13,7 +13,7 @@ OUTPUT_PDF=$2
 # Run the Docker Compose command to use the ghostscript service
 echo "Running temporary container via Docker Compose to compress the PDF..."
 
-docker-compose run --rm ghostscript "resources/$INPUT_PDF" "resources/$OUTPUT_PDF"
+docker-compose run --rm ghostscript "pdf-files/$INPUT_PDF" "pdf-files/$OUTPUT_PDF"
 
 # Check if the compression was successful
 if [ $? -eq 0 ]; then
