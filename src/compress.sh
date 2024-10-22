@@ -5,10 +5,23 @@ if [ "$#" -ne 2 ]; then
   exit 1
 fi
 
-gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dBATCH -dQUIET -sOutputFile="$2" "$1"
+gs -sDEVICE=pdfwrite \
+-dCompatibilityLevel=1.4 \
+-dPDFSETTINGS=/screen \
+-dNOPAUSE \
+-dBATCH \
+-dQUIET \
+
 
 gs -sDEVICE=pdfwrite \
   -dCompatibilityLevel=1.4 \
+  -dDownsampleColorImages=true \
+  -dColorImageDownsampleType=/Bicubic \
+  -dColorImageResolution=144 \
+  -dGrayImageDownsampleType=/Bicubic \
+  -dGrayImageResolution=144 \
+  -dMonoImageDownsampleType=/Bicubic \
+  -dMonoImageResolution=144 \
   -dPDFSETTINGS=/ebook \
   -dNOPAUSE \
   -dQUIET \
