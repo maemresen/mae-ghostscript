@@ -1,7 +1,7 @@
 # mae-ghostscript
 
 ## Overview
-`mae-ghostscript` is a Docker-based tool designed for compressing PDF files using Ghostscript. This repository includes a Docker image that streamlines the PDF compression process in a consistent, containerized environment.
+`mae-ghostscript` is a Docker-based tool designed for compressing PDF files using Ghostscript. This repository includes a Docker image that streamlines the PDF compression process in a consistent, containerized environment. For more details, visit the [GitHub repository](https://github.com/maemresen/mae-ghostscript).
 
 ## Features
 - Simple PDF compression using Ghostscript.
@@ -18,43 +18,10 @@
 To compress a PDF file, follow these steps:
 
 1. Place your PDF files in a local directory named `pdf-files` (or create one in your current directory).
-2. Run the provided script or use the Docker command directly.
-
-### Using the Script
-
-Create a script named `compress-pdf.sh` with the following content:
-
-```bash
-#!/bin/bash
-
-# Check if both input and output PDF file paths are provided
-if [ "$#" -ne 1 ]; then
-  echo "Usage: $0 input.pdf"
-  exit 1
-fi
-
-# Assign the input argument to a variable
-INPUT_PDF=$1
-
-# Run the Docker container to compress the PDF
-echo "Running temporary container via Docker to compress the PDF..."
-
-docker run --rm -it --name mae-ghostscript \
-  -v "$(pwd)/pdf-files:/app/pdf-files" \
-  -e "INPUT_PDF=$INPUT_PDF" \
-  maemresen/mae-ghostscript
-
-# Check if the compression was successful
-if [ $? -eq 0 ]; then
-  echo "PDF compression completed successfully!"
-else
-  echo "Failed to compress the PDF."
-  exit 1
-fi
-```
+2. Run the Docker command directly.
 
 ### Direct Docker Command
-Alternatively, you can run the container directly:
+Run the container using the following command:
 
 ```bash
 docker run --rm -it --name mae-ghostscript \
@@ -62,6 +29,13 @@ docker run --rm -it --name mae-ghostscript \
   -e "INPUT_PDF=your-input-file.pdf" \
   maemresen/mae-ghostscript
 ```
+
+### Output File Pattern
+The output file will be generated with the pattern `<input-filename>-compressed-<timestamp>.pdf`, where `<input-filename>` is the name of the input file without the `.pdf` extension, and `<timestamp>` is the current date and time. The compressed file will be located in the `pdf-files` directory.
+
+**Example:**
+- Input file: `example.pdf`
+- Output file: `example-compressed-2024_11_09-12_30_45.pdf`
 
 ## Environment Variables
 - `INPUT_PDF`: The name of the input PDF file to be compressed.
@@ -74,17 +48,6 @@ To build the Docker image locally:
 ```bash
 docker build --no-cache -t maemresen/mae-ghostscript .
 ```
-
-## Pushing the Docker Image to Docker Hub
-1. Log in to Docker Hub:
-   ```bash
-   docker login -u <your-dockerhub-username> -p <your-password>
-   ```
-2. Tag and push the image:
-   ```bash
-   docker tag mae-ghostscript maemresen/mae-ghostscript:latest
-   docker push maemresen/mae-ghostscript:latest
-   ```
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
